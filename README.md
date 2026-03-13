@@ -1,5 +1,13 @@
 # Facebook Sdk For Flutter
 
+> ⚠️ **Project Status: Unmaintained**
+>
+> This repository is **no longer actively maintained**.
+>
+> I originally created this plugin out of necessity to support Facebook deep links, deferred deep links, and app events in Flutter using the newer Facebook SDK versions available at the time. Unfortunately, due to work and life commitments, I was not able to continue maintaining the project as much as I intended.
+>
+> The repository will remain available for reference. There are **multiple community forks** of this project that may contain updates or fixes, so I recommend checking the forks if you plan to use this plugin.
+
 ![GitHub code size](https://img.shields.io/github/languages/code-size/saadfarhan124/sadfarhan124-facebook_flutter_plugin)
 ![GitHub followers](https://img.shields.io/github/followers/saadfarhan124?style=social)
 ![GitHub contributors](https://img.shields.io/github/contributors/saadfarhan124/sadfarhan124-facebook_flutter_plugin)
@@ -19,6 +27,7 @@ Get your app id (referred to as [APP_ID] below)
 # For IOS
 
 * If your code does not have CFBundleURLTypes, add the following just before the final </dict> element:
+
 ```
  <key>CFBundleURLTypes</key>
     <array>
@@ -42,26 +51,22 @@ Get your app id (referred to as [APP_ID] below)
 # For Android 
 
 * Add the following to your strings.xml file 
-```
 
+```
 <string name="facebook_app_id">[APP_ID]</string>
 <string name="fb_login_protocol_scheme">fb[APP_ID]</string>
-
 ```
 
 * Add the following meta tag to the application element in AndroidManifest.xml
+
 ```
-
 <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
-
 ```
 
 * Add the following element in AndroidManifest.xml
+
 ```
-
 <uses-permission android:name="android.permission.INTERNET"/>
-
 ```
 
 * Don't forget to replace [APP_ID] with your Application ID
-
