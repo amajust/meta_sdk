@@ -2,10 +2,10 @@ import Flutter
 import UIKit
 import FBSDKCoreKit
 
-let PLATFORM_CHANNEL = "flutter_facebook_sdk/methodChannel"
-let EVENTS_CHANNEL = "flutter_facebook_sdk/eventChannel"
+let PLATFORM_CHANNEL = "meta_sdk/methodChannel"
+let EVENTS_CHANNEL = "meta_sdk/eventChannel"
 
-public class SwiftFlutterFacebookSdkPlugin: NSObject, FlutterPlugin, FlutterStreamHandler {
+public class SwiftMetaSdkPlugin: NSObject, FlutterPlugin, FlutterStreamHandler {
     
     var _eventSink: FlutterEventSink?
     var deepLinkUrl:String = ""
@@ -25,7 +25,7 @@ public class SwiftFlutterFacebookSdkPlugin: NSObject, FlutterPlugin, FlutterStre
     
     
     public static func register(with registrar: FlutterPluginRegistrar) {
-        let instance = SwiftFlutterFacebookSdkPlugin()
+        let instance = SwiftMetaSdkPlugin()
         
         let channel = FlutterMethodChannel(name: PLATFORM_CHANNEL, binaryMessenger: registrar.messenger())
         

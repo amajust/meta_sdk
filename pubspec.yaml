@@ -1,4 +1,4 @@
-name: flutter_facebook_sdk
+name: meta_sdk
 description: A flutter plugin to get facebook deep links and log app events using the latest Facebook SDK to include support for iOS 14. Modernized for Meta SDK.
 version: 1.1.0
 homepage: https://github.com/amajust/meta_sdk
@@ -17,8 +17,8 @@ dev_dependencies:
 
 # flutter:
 #   plugin:
-#     androidPackage: saad.farhan.flutter_facebook_sdk
-#     pluginClass: FlutterFacebookSdkPlugin
+#     androidPackage: saad.farhan.meta_sdk
+#     pluginClass: MetaSdkPlugin
 # # For information on the generic Dart part of this file, see the
 # # following page: https://dart.dev/tools/pub/pubspec
 
@@ -31,12 +31,12 @@ flutter:
   plugin:
     platforms:
       android:
-        pluginClass: FlutterFacebookSdkPlugin
-        package: saad.farhan.flutter_facebook_sdk
+        pluginClass: MetaSdkPlugin
+        package: saad.farhan.meta_sdk
       # android:
-      #   pluginClass: FlutterFacebookSdkPlugin
+      #   pluginClass: MetaSdkPlugin
       ios:
-        pluginClass: FlutterFacebookSdkPlugin
+        pluginClass: MetaSdkPlugin
 
   # To add assets to your plugin package, add an assets section, like this:
   # assets:

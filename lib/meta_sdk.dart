@@ -4,29 +4,29 @@ import 'package:flutter/services.dart';
 /// A singleton class for plugin
 /// so that multiple streams dont open up
 
-class FlutterFacebookSdk {
-  static final FlutterFacebookSdk? _singleton = FlutterFacebookSdk._internal();
+class MetaSdk {
+  static final MetaSdk? _singleton = MetaSdk._internal();
 
-  factory FlutterFacebookSdk() {
+  factory MetaSdk() {
     return _singleton!;
   }
 
-  FlutterFacebookSdk._internal();
+  MetaSdk._internal();
 
   /// Method Channel Initilization to register method calls
   static const MethodChannel _channel =
-      const MethodChannel('flutter_facebook_sdk/methodChannel');
+      const MethodChannel('meta_sdk/methodChannel');
 
   /// Event Channel to listen to event changes
   static const EventChannel _eventChannel =
-      const EventChannel("flutter_facebook_sdk/eventChannel");
+      const EventChannel("meta_sdk/eventChannel");
 
   Stream<String>? _onDeepLinkReceived;
 
   /// Returns a stream listener to handle deep link url changes
   /// Add a listener to this event to get updated deep link url
   /// ``` dart
-  /// facebookDeepLinks = FlutterFacebookSdk();
+  /// facebookDeepLinks = MetaSdk();
   /// facebookDeepLinks.onDeepLinkReceived.listen((event) {
   /// setState(() {
   /// _deepLinkUrl = event;

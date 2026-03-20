@@ -1,4 +1,4 @@
 #import <Flutter/Flutter.h>
 
-@interface FlutterFacebookSdkPlugin : NSObject<FlutterPlugin>
+@interface MetaSdkPlugin : NSObject<FlutterPlugin>
 @end

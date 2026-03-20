@@ -1,4 +1,4 @@
-package saad.farhan.flutter_facebook_sdk
+package saad.farhan.meta_sdk
 
 import android.content.Context
 import android.content.Intent
@@ -27,8 +27,8 @@ import kotlin.collections.HashMap
 import kotlin.math.log
 
 
-/** FlutterFacebookSdkPlugin */
-class FlutterFacebookSdkPlugin : FlutterPlugin, MethodCallHandler, StreamHandler, ActivityAware, PluginRegistry.NewIntentListener {
+/** MetaSdkPlugin */
+class MetaSdkPlugin : FlutterPlugin, MethodCallHandler, StreamHandler, ActivityAware, PluginRegistry.NewIntentListener {
     /// The MethodChannel that will the communication between Flutter and native Android
     ///
     /// This local reference serves to register the plugin with the Flutter Engine and unregister it
@@ -41,15 +41,15 @@ class FlutterFacebookSdkPlugin : FlutterPlugin, MethodCallHandler, StreamHandler
 
 
     private var deepLinkUrl: String = "Saad Farhan"
-    private var PLATFORM_CHANNEL: String = "flutter_facebook_sdk/methodChannel"
-    private var EVENTS_CHANNEL: String = "flutter_facebook_sdk/eventChannel"
+    private var PLATFORM_CHANNEL: String = "meta_sdk/methodChannel"
+    private var EVENTS_CHANNEL: String = "meta_sdk/eventChannel"
     private var queuedLinks: List<String> = emptyList()
     private var eventSink: EventSink? = null
     private var context: Context? = null
     private var activityPluginBinding: ActivityPluginBinding? = null
 
     //  fun registerWith(registrar: Registrar) {
-    //    val plugin = FlutterFacebookSdkPlugin()
+    //    val plugin = MetaSdkPlugin()
     //    methodChannel = MethodChannel(registrar.messenger(), PLATFORM_CHANNEL)
     //    methodChannel.setMethodCallHandler(this)
     //  }

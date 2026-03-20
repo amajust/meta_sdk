@@ -1,9 +1,9 @@
 #
 # To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html.
-# Run `pod lib lint flutter_facebook_sdk.podspec' to validate before publishing.
+# Run `pod lib lint meta_sdk.podspec' to validate before publishing.
 #
 Pod::Spec.new do |s|
-  s.name             = 'flutter_facebook_sdk'
+  s.name             = 'meta_sdk'
   s.version          = '0.0.1'
   s.summary          = 'A new flutter plugin project.'
   s.description      = <<-DESC

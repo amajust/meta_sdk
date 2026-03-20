@@ -2,7 +2,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  const MethodChannel channel = MethodChannel('flutter_facebook_sdk');
+  const MethodChannel channel = MethodChannel('meta_sdk');
 
   TestWidgetsFlutterBinding.ensureInitialized();
 
@@ -17,6 +17,6 @@ void main() {
   });
 
   // test('getPlatformVersion', () async {
-  //   expect(await FlutterFacebookSdk.platformVersion, '42');
+  //   expect(await MetaSdk.platformVersion, '42');
   // });
 }

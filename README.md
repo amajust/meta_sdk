@@ -1,11 +1,11 @@
 # Meta SDK for Flutter
 
-[![pub package](https://img.shields.io/pub/v/flutter_facebook_sdk.svg)](https://pub.dev/packages/flutter_facebook_sdk)
+[![pub package](https://img.shields.io/pub/v/meta_sdk.svg)](https://pub.dev/packages/meta_sdk)
 ![GitHub code size](https://img.shields.io/github/languages/code-size/amajust/meta_sdk)
 ![GitHub contributors](https://img.shields.io/github/contributors/amajust/meta_sdk)
 [![GitHub](https://i.stack.imgur.com/tskMh.png) GitHub](https://github.com/amajust/)
 
-**Meta SDK** (formerly `flutter_facebook_sdk`) is a modernized Flutter plugin to integrate the latest Meta (Facebook) SDK into your applications. It supports fetching **Deep Links**, **Deferred Deep Links**, and logging **App Events** for both iOS and Android.
+**Meta SDK** (formerly `meta_sdk`) is a modernized Flutter plugin to integrate the latest Meta (Facebook) SDK into your applications. It supports fetching **Deep Links**, **Deferred Deep Links**, and logging **App Events** for both iOS and Android.
 
 This version is maintained by [amajust](https://github.com/amajust) and has been updated to support Flutter 3.x, Dart 3 (Sound Null Safety), and the latest Android/iOS platform requirements as of 2026.
 
@@ -78,7 +78,7 @@ Update your `Info.plist` with the following keys:
 ### Initialize SDK
 
 ```dart
-final facebookSdk = FlutterFacebookSdk();
+final facebookSdk = MetaSdk();
 await facebookSdk.initializeSDK();
 ```
 

@@ -1,6 +1,6 @@
-# flutter_facebook_sdk_example
+# meta_sdk_example
 
-Demonstrates how to use the flutter_facebook_sdk plugin.
+Demonstrates how to use the meta_sdk plugin.
 
 ## Getting Started
 
