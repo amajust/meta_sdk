@@ -1,3 +1,5 @@
+# Changelog
+
 ## 0.0.1
 
 - Initial version. Only iOS Support.
@@ -23,3 +25,9 @@
 ## 1.0.0
 
 - Migrate to null safety.
+
+## 1.1.0
+
+- Modernized for Meta SDK (Facebook SDK v17.x).
+- Support for Flutter 3.x and Dart 3 (Sound Null Safety).
+- Updated Android and iOS platform requirements.
