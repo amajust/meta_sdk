@@ -27,22 +27,25 @@ This version is maintained by [amajust](https://github.com/amajust) and has been
 ### Android
 
 1. Add your App ID and Client Token to `/android/app/src/main/res/values/strings.xml`:
-```xml
-<string name="facebook_app_id">[APP_ID]</string>
-<string name="fb_login_protocol_scheme">fb[APP_ID]</string>
-<string name="facebook_client_token">[CLIENT_TOKEN]</string>
-```
+
+   ```xml
+   <string name="facebook_app_id">[APP_ID]</string>
+   <string name="fb_login_protocol_scheme">fb[APP_ID]</string>
+   <string name="facebook_client_token">[CLIENT_TOKEN]</string>
+   ```
 
 2. Update `AndroidManifest.xml` with the meta-data tag inside the `<application>` element:
-```xml
-<meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
-<meta-data android:name="com.facebook.sdk.ClientToken" android:value="@string/facebook_client_token"/>
-```
+
+   ```xml
+   <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+   <meta-data android:name="com.facebook.sdk.ClientToken" android:value="@string/facebook_client_token"/>
+   ```
 
 3. Ensure you have the Internet permission:
-```xml
-<uses-permission android:name="android.permission.INTERNET"/>
-```
+
+   ```xml
+   <uses-permission android:name="android.permission.INTERNET"/>
+   ```
 
 ### iOS
 
@@ -73,12 +76,14 @@ Update your `Info.plist` with the following keys:
 ## Usage
 
 ### Initialize SDK
+
 ```dart
 final facebookSdk = FlutterFacebookSdk();
 await facebookSdk.initializeSDK();
 ```
 
 ### Log App Events
+
 ```dart
 await facebookSdk.logEvent(
   eventName: "button_clicked",
@@ -89,6 +94,7 @@ await facebookSdk.logEvent(
 ```
 
 ### Fetch Deep Links
+
 ```dart
 facebookSdk.onDeepLinkReceived.listen((event) {
   print("Deep Link Received: $event");
@@ -96,4 +102,5 @@ facebookSdk.onDeepLinkReceived.listen((event) {
 ```
 
 ## Credits
+
 Originally created by [saadfarhan124](https://github.com/saadfarhan124). Modernized and maintained by [amajust](https://github.com/amajust).
