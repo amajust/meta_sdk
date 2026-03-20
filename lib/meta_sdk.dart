@@ -126,13 +126,22 @@ class MetaSdk {
   }
 
   /// Logs Purchase Event of FBSDK with [currency] and [amount]
-  Future<bool> logPurhcase(
+  Future<bool> logPurchase(
       {required double amount,
       required String currency,
       required Map<String, Object> params}) async {
     final bool result = await _channel.invokeMethod("logPurchase",
         {"amount": amount, "currency": currency, "parameters": params});
     return result;
+  }
+
+  /// Deprecated - use logPurchase instead
+  @Deprecated('Use logPurchase instead')
+  Future<bool> logPurhcase(
+      {required double amount,
+      required String currency,
+      required Map<String, Object> params}) async {
+    return logPurchase(amount: amount, currency: currency, params: params);
   }
 
   /// Logs Search Event of FBSDK with [searchString] and [success]

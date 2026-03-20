@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.annotation.NonNull
-import bolts.AppLinks
 import com.facebook.FacebookSdk
 import com.facebook.appevents.AppEventsConstants
 import com.facebook.appevents.AppEventsLogger
@@ -20,7 +19,6 @@ import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
 import io.flutter.plugin.common.PluginRegistry
-import io.flutter.plugin.common.PluginRegistry.Registrar
 import java.lang.NullPointerException
 import java.util.*
 import kotlin.collections.HashMap
@@ -34,7 +32,6 @@ class MetaSdkPlugin : FlutterPlugin, MethodCallHandler, StreamHandler, ActivityA
     /// This local reference serves to register the plugin with the Flutter Engine and unregister it
     /// when the Flutter Engine is detached from the Activity
 
-    private lateinit var registrar: Registrar
     private lateinit var methodChannel: MethodChannel
     private lateinit var eventChannel: EventChannel
     private lateinit var logger: AppEventsLogger
@@ -48,11 +45,6 @@ class MetaSdkPlugin : FlutterPlugin, MethodCallHandler, StreamHandler, ActivityA
     private var context: Context? = null
     private var activityPluginBinding: ActivityPluginBinding? = null
 
-    //  fun registerWith(registrar: Registrar) {
-    //    val plugin = MetaSdkPlugin()
-    //    methodChannel = MethodChannel(registrar.messenger(), PLATFORM_CHANNEL)
-    //    methodChannel.setMethodCallHandler(this)
-    //  }
 
     override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
         methodChannel = MethodChannel(flutterPluginBinding.binaryMessenger, PLATFORM_CHANNEL)
@@ -93,6 +85,12 @@ class MetaSdkPlugin : FlutterPlugin, MethodCallHandler, StreamHandler, ActivityA
             }
             "activateApp" -> {
                 logger.logEvent(AppEventsConstants.EVENT_NAME_ACTIVATED_APP)
+                result.success(true)
+            }
+            "initializeSDK" -> {
+                // Android SDK initializes automatically via manifest, just activateApp
+                logger.logEvent(AppEventsConstants.EVENT_NAME_ACTIVATED_APP)
+                result.success(true)
             }
             "logCompleteRegistration" -> {
                 val args = call.arguments as HashMap<String, Any>
@@ -184,11 +182,11 @@ class MetaSdkPlugin : FlutterPlugin, MethodCallHandler, StreamHandler, ActivityA
     }
 
     private fun initFbSdk() {
-        FacebookSdk.setAutoInitEnabled(true)
+        FacebookSdk.setAutoLogAppEventsEnabled(true)
         FacebookSdk.fullyInitialize()
-        logger = AppEventsLogger.newLogger(context)
+        logger = AppEventsLogger.newLogger(context!!)
 
-        val targetUri = AppLinks.getTargetUrlFromInboundIntent(context, activityPluginBinding!!.activity.intent)
+        val targetUri = activityPluginBinding!!.activity.intent.data
         AppLinkData.fetchDeferredAppLinkData(context, object : AppLinkData.CompletionHandler {
             override fun onDeferredAppLinkDataFetched(appLinkData: AppLinkData?) {
 
@@ -255,10 +253,10 @@ class MetaSdkPlugin : FlutterPlugin, MethodCallHandler, StreamHandler, ActivityA
 
     }
 
-    override fun onNewIntent(intent: Intent?): Boolean {
+    override fun onNewIntent(intent: Intent): Boolean {
         try {
             // some code
-            deepLinkUrl = AppLinks.getTargetUrl(intent).toString()
+            deepLinkUrl = intent.dataString ?: ""
             eventSink!!.success(deepLinkUrl)
         } catch (e: NullPointerException) {
             // handler

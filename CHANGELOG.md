@@ -31,3 +31,14 @@
 - Modernized for Meta SDK (Facebook SDK v17.x).
 - Support for Flutter 3.x and Dart 3 (Sound Null Safety).
 - Updated Android and iOS platform requirements.
+
+## 1.2.0
+
+- Fixed iOS deprecated `AppEvents` static calls → `AppEvents.shared` instance API (FB SDK 17+).
+- Fixed iOS `Settings.setAdvertiserTrackingEnabled` → `Settings.shared.isAdvertiserTrackingEnabled`.
+- Fixed iOS `ApplicationDelegate.initializeSDK(nil)` → `ApplicationDelegate.shared.initializeSDK()`.
+- Fixed Android: added `initializeSDK` method handler.
+- Fixed Android: `activateApp` now returns `result.success(true)`.
+- Fixed Dart: renamed `logPurhcase` → `logPurchase` (typo fix, deprecated alias kept for compatibility).
+- Fixed `pubspec.yaml`: corrected iOS pluginClass to `SwiftMetaSdkPlugin`.
+- Bumped `compileSdkVersion` to 35, Kotlin to 2.1.0, AGP to 8.9.1.

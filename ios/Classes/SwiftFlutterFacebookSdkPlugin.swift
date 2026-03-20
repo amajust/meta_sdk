@@ -39,7 +39,7 @@ public class SwiftMetaSdkPlugin: NSObject, FlutterPlugin, FlutterStreamHandler {
     
     public func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [AnyHashable : Any] = [:]) -> Bool {
         
-        Settings.setAdvertiserTrackingEnabled(false)
+    Settings.shared.isAdvertiserTrackingEnabled = false
         let launchOptionsForFacebook = launchOptions as? [UIApplication.LaunchOptionsKey: Any]
         ApplicationDelegate.shared.application(
             application,
@@ -83,14 +83,11 @@ public class SwiftMetaSdkPlugin: NSObject, FlutterPlugin, FlutterStreamHandler {
         ]
         switch(type){
         case "addToWishlist":
-            AppEvents.logEvent(.addedToWishlist, valueToSum: price, parameters: parameters)
-            break
+            AppEvents.shared.logEvent(.addedToWishlist, valueToSum: price, parameters: parameters)
         case "addToCart":
-            AppEvents.logEvent(.addedToCart, valueToSum: price, parameters: parameters)
-            break
+            AppEvents.shared.logEvent(.addedToCart, valueToSum: price, parameters: parameters)
         case "viewContent":
-            AppEvents.logEvent(.viewedContent, valueToSum: price, parameters: parameters)
-            break
+            AppEvents.shared.logEvent(.viewedContent, valueToSum: price, parameters: parameters)
         default:
             break
         }
@@ -100,11 +97,11 @@ public class SwiftMetaSdkPlugin: NSObject, FlutterPlugin, FlutterStreamHandler {
         let parameters = [
             AppEvents.ParameterName.registrationMethod.rawValue: registrationMethod
         ]
-        AppEvents.logEvent(.completedRegistration, parameters: parameters)
+        AppEvents.shared.logEvent(.completedRegistration, parameters: parameters)
     }
     
     func logPurchase(amount:Double, currency:String, parameters: Dictionary<String,Any>){
-        AppEvents.logPurchase(amount, currency: currency, parameters: parameters)
+        AppEvents.shared.logPurchase(amount: amount, currency: currency, parameters: parameters)
     }
     
     func logSearchEvent(
@@ -122,7 +119,7 @@ public class SwiftMetaSdkPlugin: NSObject, FlutterPlugin, FlutterStreamHandler {
             AppEvents.ParameterName.success.rawValue: NSNumber(value: success ? 1 : 0)
         ] as [String : Any]
         
-        AppEvents.logEvent(.searched, parameters: parameters)
+        AppEvents.shared.logEvent(.searched, parameters: parameters)
     }
     
     func logInitiateCheckoutEvent(
@@ -143,7 +140,7 @@ public class SwiftMetaSdkPlugin: NSObject, FlutterPlugin, FlutterStreamHandler {
             AppEvents.ParameterName.currency.rawValue: currency
         ] as [String : Any]
         
-        AppEvents.logEvent(.initiatedCheckout, valueToSum: totalPrice, parameters: parameters)
+        AppEvents.shared.logEvent(.initiatedCheckout, valueToSum: totalPrice, parameters: parameters)
     }
     
     func logGenericEvent(args: Dictionary<String, Any>){
@@ -151,13 +148,13 @@ public class SwiftMetaSdkPlugin: NSObject, FlutterPlugin, FlutterStreamHandler {
         let valueToSum = args["valueToSum"] as? Double
         let parameters = args["parameters"] as? Dictionary<String, Any>
         if(valueToSum != nil && parameters != nil){
-            AppEvents.logEvent(AppEvents.Name(eventName), valueToSum: valueToSum!, parameters: parameters!)
+            AppEvents.shared.logEvent(AppEvents.Name(eventName), valueToSum: valueToSum!, parameters: parameters!)
         }else if(parameters != nil){
-            AppEvents.logEvent(AppEvents.Name(eventName), parameters: parameters!)
+            AppEvents.shared.logEvent(AppEvents.Name(eventName), parameters: parameters!)
         }else if(valueToSum != nil){
-            AppEvents.logEvent(AppEvents.Name(eventName), valueToSum: valueToSum!)
+            AppEvents.shared.logEvent(AppEvents.Name(eventName), valueToSum: valueToSum!)
         }else{
-            AppEvents.logEvent(AppEvents.Name(eventName))
+            AppEvents.shared.logEvent(AppEvents.Name(eventName))
         }
     }
     
@@ -175,7 +172,7 @@ public class SwiftMetaSdkPlugin: NSObject, FlutterPlugin, FlutterStreamHandler {
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
         switch call.method {
         case "initializeSDK":
-            ApplicationDelegate.initializeSDK(nil)
+            ApplicationDelegate.shared.initializeSDK()
             result(nil)
             return
         case "getPlatformVersion":
@@ -211,7 +208,7 @@ public class SwiftMetaSdkPlugin: NSObject, FlutterPlugin, FlutterStreamHandler {
             }
             
         case "activateApp":
-            AppEvents.activateApp()
+            AppEvents.shared.activateApp()
             result(true)
         case "logCompleteRegistration":
             guard let args = call.arguments else {
@@ -277,7 +274,7 @@ public class SwiftMetaSdkPlugin: NSObject, FlutterPlugin, FlutterStreamHandler {
             }
             if  let myArgs = args as? [String: Any],
                 let enabled = myArgs["enabled"] as? Bool {
-                Settings.setAdvertiserTrackingEnabled(enabled)
+                Settings.shared.isAdvertiserTrackingEnabled = enabled
                 result(enabled)
                 return
             }
