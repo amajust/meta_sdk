@@ -188,7 +188,7 @@ class FlutterFacebookSdk {
   Future<bool> logEvent(
       {required String eventName,
       double? valueToSum,
-      dynamic? parameters}) async {
+      dynamic parameters}) async {
     final bool result = await _channel.invokeMethod("logEvent", {
       'eventName': eventName,
       'valueToSum': valueToSum,

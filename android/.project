@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>flutter_facebook_sdk</name>
+	<name>flutter_facebook_sdk-android</name>
 	<comment>Project android created by Buildship.</comment>
 	<projects>
 	</projects>
@@ -22,12 +22,12 @@
 	</natures>
 	<filteredResources>
 		<filter>
-			<id>1619954730592</id>
+			<id>1773977278893</id>
 			<name></name>
 			<type>30</type>
 			<matcher>
 				<id>org.eclipse.core.resources.regexFilterMatcher</id>
-				<arguments>node_modules|.git|__CREATED_BY_JAVA_LANGUAGE_SERVER__</arguments>
+				<arguments>node_modules|\.git|__CREATED_BY_JAVA_LANGUAGE_SERVER__</arguments>
 			</matcher>
 		</filter>
 	</filteredResources>

@@ -1,9 +1,90 @@
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
 .DS_Store
+.atom/
+.buildlog/
+.history
+.svn/
+.vscode/
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# The .vscode folder contains launch.json and tasks.json. These are shared
+# for all team members. However, settings.json is usually a local preference.
+# .vscode/settings.json
+
+# Flutter/Dart/Pub related
+**/doc/api/
+**/ios/Flutter/.last_build_id
 .dart_tool/
-.vscode/ 
+.flutter-plugins
+.flutter-plugins-dependencies
 .packages
+.pub-cache/
 .pub/
-pubspec.lock
+__pycache__/
 build/
-doc/api/
+
+# Symbolication logging
+flutter_*.png
+flutter_*.symbols
+
+# Android related
+**/android/**/generated/
+**/android/gradle/
+**/android/local.properties
+**/android/project.xcworkspace
+**/android/settings.gradle
+**/android/settings_aar.gradle
+**/android/app/src/main/res/values/strings.xml
+!**/android/gradle/wrapper/gradle-wrapper.jar
+!**/android/gradle/wrapper/gradle-wrapper.properties
+
+# iOS/macOS related
+**/ios/**/*.mode1v3
+**/ios/**/*.mode2v3
+**/ios/**/*.moved-aside
+**/ios/**/*.pbxuser
+**/ios/**/*.perspectivev3
+**/ios/Flutter/App.framework
+**/ios/Flutter/Flutter.framework
+**/ios/Flutter/GeneratedPluginRegistrant.h
+**/ios/Flutter/GeneratedPluginRegistrant.m
+**/ios/Flutter/flutter_export_environment.sh
+**/ios/ServiceDefinitions.json
+**/ios/Runner/GeneratedPluginRegistrant.h
+**/ios/Runner/GeneratedPluginRegistrant.m
+
+# Coverage
+coverage/
+
+# Windows related
+**/windows/flutter/ephemeral/
+**/windows/flutter/generated_config.cmake
+**/windows/CMakeCache.txt
+**/windows/CMakeFiles/
+**/windows/CMakeLists.txt.user
+**/windows/decode_helper.exe
+**/windows/runner/*.exe
+**/windows/runner/*.dll
+**/windows/runner/*.pdb
+
+# Linux related
+**/linux/flutter/ephemeral/
+**/linux/flutter/generated_config.cmake
+
+# Web related
+**/web/index.html.patch
+
+# Example app specific
 example/pubspec.lock
+example/ios/Pods/
+example/android/.gradle/
+example/build/

@@ -1,72 +1,99 @@
-# Facebook Sdk For Flutter
+# Meta SDK for Flutter
 
-> ⚠️ **Project Status: Unmaintained**
->
-> This repository is **no longer actively maintained**.
->
-> I originally created this plugin out of necessity to support Facebook deep links, deferred deep links, and app events in Flutter using the newer Facebook SDK versions available at the time. Unfortunately, due to work and life commitments, I was not able to continue maintaining the project as much as I intended.
->
-> The repository will remain available for reference. There are **multiple community forks** of this project that may contain updates or fixes, so I recommend checking the forks if you plan to use this plugin.
+[![pub package](https://img.shields.io/pub/v/flutter_facebook_sdk.svg)](https://pub.dev/packages/flutter_facebook_sdk)
+![GitHub code size](https://img.shields.io/github/languages/code-size/amajust/meta_sdk)
+![GitHub contributors](https://img.shields.io/github/contributors/amajust/meta_sdk)
+[![GitHub](https://i.stack.imgur.com/tskMh.png) GitHub](https://github.com/amajust/)
 
-![GitHub code size](https://img.shields.io/github/languages/code-size/saadfarhan124/sadfarhan124-facebook_flutter_plugin)
-![GitHub followers](https://img.shields.io/github/followers/saadfarhan124?style=social)
-![GitHub contributors](https://img.shields.io/github/contributors/saadfarhan124/sadfarhan124-facebook_flutter_plugin)
-[![Linkedin](https://i.stack.imgur.com/gVE0j.png) LinkedIn](https://www.linkedin.com/in/saadfarhan124/)
-[![GitHub](https://i.stack.imgur.com/tskMh.png) GitHub](https://github.com/saadfarhan124/)
+**Meta SDK** (formerly `flutter_facebook_sdk`) is a modernized Flutter plugin to integrate the latest Meta (Facebook) SDK into your applications. It supports fetching **Deep Links**, **Deferred Deep Links**, and logging **App Events** for both iOS and Android.
 
-`facebook_sdk_flutter` allows you to fetch `deep links`, `deferred deep links` and `log facebook app events`.
+This version is maintained by [amajust](https://github.com/amajust) and has been updated to support Flutter 3.x, Dart 3 (Sound Null Safety), and the latest Android/iOS platform requirements as of 2026.
 
-This was created using the latest facebook SDK to include support for iOS 14. The plugin currently supports app events and deeps links for iOS and Android. 
+## Features
+
+- ✅ Fetch Deep Links and Deferred Deep Links.
+- ✅ Log standard and custom App Events.
+- ✅ Support for iOS 14+ Advertiser Tracking.
+- ✅ Modernized for Flutter 3.x and Dart 3.
+- ✅ Latest Meta SDK (v17.x).
 
 ## Prerequisites
 
-First of all, if you don't have one already, you must first create an app at Facebook developers: https://developers.facebook.com/
+1. Create a Meta App at the [Meta for Developers](https://developers.facebook.com/) portal.
+2. Obtain your **App ID** and **Display Name**.
 
-Get your app id (referred to as [APP_ID] below)
+## Platform Configuration
 
-# For IOS
+### Android
 
-* If your code does not have CFBundleURLTypes, add the following just before the final </dict> element:
-
-```
- <key>CFBundleURLTypes</key>
-    <array>
-      <dict>
-      <key>CFBundleURLSchemes</key>
-      <array>
-        <string>fb[APP_ID]</string>
-      </array>
-      </dict>
-    </array>
-    <key>FacebookAppID</key>
-    <string>[APP_ID]</string>
-    <key>FacebookDisplayName</key>
-    <string>[DISPLAY_NAME]</string>
-    <key>FacebookAutoLogAppEventsEnabled</key>
-    <true/>
-    <key>FacebookAdvertiserIDCollectionEnabled</key>
-    <true/>
-```
-
-# For Android 
-
-* Add the following to your strings.xml file 
-
-```
+1. Add your App ID and Client Token to `/android/app/src/main/res/values/strings.xml`:
+```xml
 <string name="facebook_app_id">[APP_ID]</string>
 <string name="fb_login_protocol_scheme">fb[APP_ID]</string>
+<string name="facebook_client_token">[CLIENT_TOKEN]</string>
 ```
 
-* Add the following meta tag to the application element in AndroidManifest.xml
-
-```
+2. Update `AndroidManifest.xml` with the meta-data tag inside the `<application>` element:
+```xml
 <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+<meta-data android:name="com.facebook.sdk.ClientToken" android:value="@string/facebook_client_token"/>
 ```
 
-* Add the following element in AndroidManifest.xml
-
-```
+3. Ensure you have the Internet permission:
+```xml
 <uses-permission android:name="android.permission.INTERNET"/>
 ```
 
-* Don't forget to replace [APP_ID] with your Application ID
+### iOS
+
+Update your `Info.plist` with the following keys:
+
+```xml
+<key>CFBundleURLTypes</key>
+<array>
+  <dict>
+  <key>CFBundleURLSchemes</key>
+  <array>
+    <string>fb[APP_ID]</string>
+  </array>
+  </dict>
+</array>
+<key>FacebookAppID</key>
+<string>[APP_ID]</string>
+<key>FacebookClientToken</key>
+<string>[CLIENT_TOKEN]</string>
+<key>FacebookDisplayName</key>
+<string>[DISPLAY_NAME]</string>
+<key>FacebookAutoLogAppEventsEnabled</key>
+<true/>
+<key>FacebookAdvertiserIDCollectionEnabled</key>
+<true/>
+```
+
+## Usage
+
+### Initialize SDK
+```dart
+final facebookSdk = FlutterFacebookSdk();
+await facebookSdk.initializeSDK();
+```
+
+### Log App Events
+```dart
+await facebookSdk.logEvent(
+  eventName: "button_clicked",
+  parameters: {
+    'button_id': 'main_cta',
+  },
+);
+```
+
+### Fetch Deep Links
+```dart
+facebookSdk.onDeepLinkReceived.listen((event) {
+  print("Deep Link Received: $event");
+});
+```
+
+## Credits
+Originally created by [saadfarhan124](https://github.com/saadfarhan124). Modernized and maintained by [amajust](https://github.com/amajust).
