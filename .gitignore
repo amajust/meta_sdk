@@ -38,12 +38,8 @@ flutter_*.symbols
 
 # Android related
 **/android/**/generated/
-**/android/gradle/
 **/android/local.properties
 **/android/project.xcworkspace
-**/android/settings.gradle
-**/android/settings_aar.gradle
-**/android/app/src/main/res/values/strings.xml
 !**/android/gradle/wrapper/gradle-wrapper.jar
 !**/android/gradle/wrapper/gradle-wrapper.properties
 
