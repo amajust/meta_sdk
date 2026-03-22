@@ -1,6 +1,6 @@
 name: meta_sdk
 description: A flutter plugin to get facebook deep links and log app events using the latest Facebook SDK to include support for iOS 14. Modernized for Meta SDK.
-version: 1.2.0
+version: 1.2.1
 homepage: https://github.com/amajust/meta_sdk
 
 environment:

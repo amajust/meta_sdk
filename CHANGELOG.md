@@ -42,3 +42,9 @@
 - Fixed Dart: renamed `logPurhcase` → `logPurchase` (typo fix, deprecated alias kept for compatibility).
 - Fixed `pubspec.yaml`: corrected iOS pluginClass to `SwiftMetaSdkPlugin`.
 - Bumped `compileSdkVersion` to 35, Kotlin to 2.1.0, AGP to 8.9.1.
+
+## 1.2.1
+
+- Fixed critical Android hang: Added missing `result.success(true)` to all method channel handlers.
+- Improved Android stability: Added safety checks for `AppEventsLogger` initialization.
+- Added native Android debug logging for better troubleshooting.

@@ -82,37 +82,58 @@ class MetaSdkPlugin : FlutterPlugin, MethodCallHandler, StreamHandler, ActivityA
             "logViewedContent", "logAddToCart", "logAddToWishlist" -> {
                 val args = call.arguments as HashMap<String, Any>
                 logEvent(args["contentType"].toString(), args["contentData"].toString(), args["contentId"].toString(), args["currency"].toString(), args["price"].toString().toDouble(), call.method)
+                result.success(true)
             }
             "activateApp" -> {
                 logger.logEvent(AppEventsConstants.EVENT_NAME_ACTIVATED_APP)
                 result.success(true)
             }
             "initializeSDK" -> {
-                // Android SDK initializes automatically via manifest, just activateApp
-                logger.logEvent(AppEventsConstants.EVENT_NAME_ACTIVATED_APP)
-                result.success(true)
+                if (::logger.isInitialized) {
+                    logger.logEvent(AppEventsConstants.EVENT_NAME_ACTIVATED_APP)
+                    result.success(true)
+                } else {
+                    if (context != null) {
+                        try {
+                            FacebookSdk.setAutoLogAppEventsEnabled(true)
+                            FacebookSdk.fullyInitialize()
+                            logger = AppEventsLogger.newLogger(context!!)
+                            logger.logEvent(AppEventsConstants.EVENT_NAME_ACTIVATED_APP)
+                            result.success(true)
+                        } catch (e: Exception) {
+                            result.error("INIT_FAILED", e.message, null)
+                        }
+                    } else {
+                        result.error("NO_CONTEXT", "Context is null", null)
+                    }
+                }
             }
             "logCompleteRegistration" -> {
                 val args = call.arguments as HashMap<String, Any>
                 val params = Bundle()
                 params.putString(AppEventsConstants.EVENT_PARAM_REGISTRATION_METHOD, args["registrationMethod"].toString())
                 logger.logEvent(AppEventsConstants.EVENT_NAME_COMPLETED_REGISTRATION, params)
+                result.success(true)
             }
             "logPurchase" -> {
                 val args = call.arguments as HashMap<String, Any>
                 logPurchase(args["amount"].toString().toDouble(), args["currency"].toString(), args["parameters"] as HashMap<String, String>)
+                result.success(true)
             }
             "logSearch" -> {
                 val args = call.arguments as HashMap<String, Any>
                 logSearchEvent(args["contentType"].toString(), args["contentData"].toString(), args["contentId"].toString(), args["searchString"].toString(), args["success"].toString().toBoolean())
+                result.success(true)
             }
             "logInitiateCheckout" -> {
                 val args = call.arguments as HashMap<String, Any>
                 logInitiateCheckoutEvent(args["contentData"].toString(), args["contentId"].toString(), args["contentType"].toString(), args["numItems"].toString().toInt(), args["paymentInfoAvailable"].toString().toBoolean(), args["currency"].toString(), args["totalPrice"].toString().toDouble())
+                result.success(true)
             }
             "logEvent" -> {
                 val args = call.arguments as HashMap<String, Any>
                 logGenericEvent(args)
+                result.success(true)
             }
             else -> {
                 result.notImplemented()
